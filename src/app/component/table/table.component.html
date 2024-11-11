@@ -1,0 +1,165 @@
+
+    <div class="col-12 xl:col-12">
+        <p-toolbar>
+            <div class="p-toolbar-group-left">
+                <span class="font-semibold">Product Management</span>
+            </div>
+            <div class="p-toolbar-group-right">
+                <p-button label="Add Product" icon="pi pi-plus" (onClick)="showDialog()" />
+            </div>
+        </p-toolbar>
+    </div>
+    
+    
+    
+    
+    <!-- Modal form to insert or update data -->
+    
+    <div class="flex justify-content-center">
+        <p-dialog header="Add Data" [modal]="true" [(visible)]="visible" [style]="{ width: '25rem' }">
+            <span class="p-text-secondary block mb-5">Update your information.</span>
+            <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+                <div class="flex align-items-center gap-3 mb-3">
+                    <label for="username" class="font-semibold w-6rem">Product name</label>
+                    <!-- <input pInputText id="username" class="flex-auto" autocomplete="off" /> -->
+                    <input pInputText formControlName="name" placeholder="Product Name" class="flex-auto"
+                        autocomplete="off" />
+                    <!-- <div>
+                        <small *ngIf="productForm.get('name')?.invalid && productForm.get('name')?.touched" class="p-error">
+                            Product name is required.
+                        </small>
+                    </div> -->
+                </div>
+                <div class="flex align-items-center gap-3 mb-3">
+                    <label class="font-semibold w-6rem">Price</label>
+                    <!-- <input pInputText id="username" class="flex-auto" autocomplete="off" /> -->
+                    <input formControlName="price" type="number" placeholder="Price" pInputText class="flex-auto"
+                        autocomplete="off" />
+                    <!-- <small *ngIf="productForm.get('price')?.invalid && productForm.get('price')?.touched" class="p-error">
+                        Price is required and must be a positive number.
+                    </small> -->
+                </div>
+                <div>
+                    <div class=" flex column align-items-center gap-3 mb-3">
+                        <label class="font-semibold w-6rem">Category</label>
+                        <!-- <input pInputText id="username" class="flex-auto" autocomplete="off" /> -->
+                        <input formControlName="category" type="text" placeholder="category" pInputText class="flex-auto"
+                            autocomplete="off" />
+                        <!-- <small *ngIf="productForm.get('category')?.invalid && productForm.get('category')?.touched"
+                            class="p-error">
+                            Category is required and must be a positive number.
+                        </small> -->
+                    </div>
+    
+                </div>
+                <div class="flex justify-content-end gap-2 mb-3">
+                    <p-button label="Cancel" (onClick)="onCancel()" severity="secondary" />
+                    <p-button *ngIf="update" label="Update" (onClick)="onUpdate()" />
+                    <p-button label="Save" *ngIf="!update" (onClick)="onSubmit()" />
+                </div>
+    
+            </form>
+        </p-dialog>
+    </div>
+    
+    
+    <!-- delete modal -->
+    
+    <div class="card flex justify-content-center">
+        <p-dialog header="Add Data" [modal]="true" [(visible)]="delete" [style]="{ width: '25rem' }">
+            <span class="p-text-secondary block mb-5">Are you sure you want to Delete?</span>
+            <div class="flex justify-content-end gap-2 mb-3">
+                <p-button label="Cancel" (onClick)="delete = false"  severity="secondary" />
+                <p-button label="Delete" (onClick)="deleteConfirm()" severity="danger" />
+            </div>
+        </p-dialog>
+    </div>
+    
+    
+    <!-- Data table  -->
+    
+    <div class="col-12 xl:col-12">
+        <div class="">
+            <p-table [value]="products" editable="true" class="p-element" styleClass="p-datatable-striped"
+            [paginator]="true"
+            [rows]="5"
+            [tableStyle]="{'min-width': '50rem'}">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Sr. No</th>
+                        <th pSortableColumn="name">Name <p-sortIcon field="index" /></th>
+                        <th pSortableColumn="price">Price <p-sortIcon field="price" /></th>
+                        <th pSortableColumn="category">Category <p-sortIcon field="category" /></th>
+                        <th>Actions</th>
+                    </tr>
+    
+                    <tr>
+                        <th>
+    
+                        </th>
+                        <th>
+                            <p-columnFilter type="text" field="name" [showClearButton]="false" />
+                        </th>
+                        <th>
+                            <p-columnFilter type="text" field="price" [showClearButton]="false" />
+                        </th>
+                        <th>
+                            <p-columnFilter type="text" field="category" [showClearButton]="false" />
+                        </th>
+                        <th>
+                           
+                        </th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-product let-rowIndex="rowIndex">
+                    <tr>
+                        <td>
+                            <p-cellEditor>
+                                <ng-template pTemplate="output">
+                                    {{ rowIndex + 1}}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+                        <td>
+                            <p-cellEditor>
+                                <ng-template pTemplate="output">
+                                    {{ product.name }}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+                        <td>
+                            <p-cellEditor>
+                                <ng-template pTemplate="output">
+                                    {{ product.price }}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+                        <td>
+                            <p-cellEditor>
+                                <ng-template pTemplate="output">
+                                    {{ product.category }}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+                        <td>
+                            <div class="flex gap-2">
+                                <button pButton icon="pi pi-pencil" (click)="onEdit(product, rowIndex)" severity="secondary" ></button>
+                                <button pButton icon="pi pi-trash" (click)="onDelete(rowIndex)" severity="warning" ></button>
+                            </div>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+        <div>
+            Total: <span class="text-color">{{products.length}}</span>
+        </div>
+    </div>
+    
+    
+    
+    
+    
+    <p-toast position="bottom-right" key="br" />
+    <p-toast position="bottom-center" key="er"></p-toast>
+

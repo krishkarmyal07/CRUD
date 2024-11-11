@@ -1,0 +1,16 @@
+
+
+
+
+<div class="layout-content-wrapper">
+        <div class="">
+                <div class="border-round-sm font-bold">
+                    <app-table (dataChanged)="onDataChanged($event)" ></app-table> 
+                </div>
+            <div class="col">
+                <!-- <div class="border-round-sm font-bold h-full mb-3"><app-graph [products]="parentData"></app-graph></div> -->
+                <app-graph [products]="parentData"></app-graph>
+            </div>
+        </div>
+</div>
+

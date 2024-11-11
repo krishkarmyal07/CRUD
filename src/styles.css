@@ -1,1 +1,23 @@
-/* You can add global styles to this file, and also import other style files */
+
+@import 'primeng/resources/primeng.min.css';
+@import "primeng/resources/themes/saga-blue/theme.css";
+@import 'primeicons/primeicons.css';
+
+html {
+	height: 100%;
+}
+
+body {
+    
+	background-color: #eef0fb;
+	min-height: 100%;
+	overflow-x: hidden;
+	margin: 0;
+    font-weight: 400;
+
+
+}
+
+.layout-content-wrapper {
+    padding: 2rem;
+}
