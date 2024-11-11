@@ -32,7 +32,7 @@ export class TableComponent implements OnInit{
                 { name: 'Product E', price: 100, category: 'Category 5' },
   ]
 
-  update:boolean = false;
+  update:boolean = false; 
   visible: boolean = false;
   productForm: FormGroup;
   index: any;
@@ -52,7 +52,8 @@ export class TableComponent implements OnInit{
   ngOnInit(): void {
     this.updateParentData()
   }
-
+  
+  // common code for add and update that hide and emit data to parent component 
   updateParentData() {
     this.productForm.reset();
     this.visible = false
@@ -96,7 +97,7 @@ export class TableComponent implements OnInit{
     
   }
 
-
+//  adds product to array
   onSubmit() {
     if (this.productForm.valid) {
       this.products.push(this.productForm.value)
@@ -114,6 +115,7 @@ export class TableComponent implements OnInit{
 
 
 
+// updates the table with inserted value
   onUpdate(){
     if (this.productForm.valid){
       this.products[this.index] = this.productForm.value;
@@ -125,6 +127,7 @@ export class TableComponent implements OnInit{
     }
   }
 
+  // opens form
   showDialog() {
     this.visible = true;
     this.productForm.reset()
@@ -135,10 +138,13 @@ onCancel(){
   this.update = false
 }
 
+// display toast on success
 showBottomRight(val: string) {
   this.messageService.clear();
   this.messageService.add({ severity: 'success', summary: val == 'Update'? 'Updated': val == 'Add'? 'Inserted': 'Deleted', detail: val == 'Update'? 'Product Updated Successfully': val == 'Add'? 'Product Added Successfully': 'Product Deleted Successfully', key: 'br', life: 3000 });
 }
+
+// displays error msg for invalid form
 showBottomCenter() {
   this.messageService.clear();
   this.messageService.add({key: 'er', severity:'error', summary: 'Error', detail: 'All fields are required'});
