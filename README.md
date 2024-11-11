@@ -1,27 +1,59 @@
-# CRUD
+<h1 align="center" id="title">CRUD Application</h1>
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.11.
+<p id="description">This is a CRUD (Create Read Update Delete) application built using Angular demonstrating real-time data updates with data displayed in both a table and graph format.</p>
 
-## Development server
+<h2>🚀 Demo</h2>
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+[https://krishkarmyal07.github.io/CRUD/](https://krishkarmyal07.github.io/CRUD/)
 
-## Code scaffolding
+<h2>Project Screenshots:</h2>
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+<img src="https://ibb.co/5LtNcSH" alt="project-screenshot" width="500px" height="500px/">
 
-## Build
+  
+  
+<h2>🧐 Features</h2>
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Here're some of the project's best features:
 
-## Running unit tests
+*   Real-Time Data Updates: Data updates in real-time and reflects changes in both the table and graph components.
+*   Separate Components: Uses distinct components for table data and graphical representation promoting modular design.
+*   Table Functionalities : Supports sorting filtering and pagination for efficient data management. Includes interactive dialogs for adding editing and deleting data entries.
+*   Responsive Design: The layout is designed to be responsive making it compatible across various devices.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+<h2>🛠️ Installation Steps:</h2>
 
-## Running end-to-end tests
+<p>1. 1</p>
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+```
+git clone https://github.com/krishkarmyal07/CRUD.git
+```
 
-## Further help
+<p>2. 2</p>
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+```
+cd CRUD
+```
+
+<p>3. 3</p>
+
+```
+npm install
+```
+
+<p>4. 4</p>
+
+```
+ng serve
+```
+
+  
+  
+<h2>💻 Built with</h2>
+
+Technologies used in the project:
+
+*   To install and run this application make sure the following tools are installed:
+*   Angular CLI: v18.2.11
+*   Node.js: v18.20.4
+*   npm: v10.7.0
