@@ -11,7 +11,9 @@ export const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes), BrowserAnimationsModule],
+    imports: [RouterModule.forRoot(routes, {
+        useHash: true
+    }), BrowserAnimationsModule],
     exports: [RouterModule],
   })
   export class AppRoutingModule {}
