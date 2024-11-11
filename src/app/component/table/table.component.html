@@ -86,8 +86,8 @@
             [tableStyle]="{'min-width': '50rem'}">
                 <ng-template pTemplate="header">
                     <tr>
-                        <th>Sr. No</th>
-                        <th pSortableColumn="name">Name <p-sortIcon field="index" /></th>
+                        <th>Id <p-sortIcon field="id" /></th>
+                        <th pSortableColumn="name">Name <p-sortIcon field="name" /></th>
                         <th pSortableColumn="price">Price <p-sortIcon field="price" /></th>
                         <th pSortableColumn="category">Category <p-sortIcon field="category" /></th>
                         <th>Actions</th>
@@ -95,7 +95,7 @@
     
                     <tr>
                         <th>
-    
+                            <p-columnFilter type="text" field="id" [showClearButton]="false" />
                         </th>
                         <th>
                             <p-columnFilter type="text" field="name" [showClearButton]="false" />
@@ -116,7 +116,7 @@
                         <td>
                             <p-cellEditor>
                                 <ng-template pTemplate="output">
-                                    {{ rowIndex + 1}}
+                                    {{ product.id}}
                                 </ng-template>
                             </p-cellEditor>
                         </td>
@@ -143,8 +143,8 @@
                         </td>
                         <td>
                             <div class="flex gap-2">
-                                <button pButton icon="pi pi-pencil" (click)="onEdit(product, rowIndex)" severity="secondary" ></button>
-                                <button pButton icon="pi pi-trash" (click)="onDelete(rowIndex)" severity="warning" ></button>
+                                <button pButton icon="pi pi-pencil" (click)="onEdit(product, product.id)" severity="secondary" ></button>
+                                <button pButton icon="pi pi-trash" (click)="onDelete(product.id)" severity="warning" ></button>
                             </div>
                         </td>
                     </tr>

@@ -25,11 +25,11 @@ export class TableComponent implements OnInit{
   @Input() childData: string | undefined = '';
   @Output() dataChanged = new EventEmitter<any>();
   products: Product[] = [
-                { name: 'Product A', price: 100, category: 'Category 1' },
-                { name: 'Product B', price: 200, category: 'Category 2' },
-                { name: 'Product C', price: 100, category: 'Category 3' },
-                { name: 'Product D', price: 200, category: 'Category 4' },
-                { name: 'Product E', price: 100, category: 'Category 5' },
+                { id: 1, name: 'Product A', price: 100, category: 'Category 1' },
+                { id: 2, name: 'Product B', price: 200, category: 'Category 2' },
+                { id: 3, name: 'Product C', price: 100, category: 'Category 3' },
+                { id: 4, name: 'Product D', price: 200, category: 'Category 4' },
+                { id: 5, name: 'Product E', price: 100, category: 'Category 5' },
   ]
 
   update:boolean = false; 
@@ -37,7 +37,7 @@ export class TableComponent implements OnInit{
   productForm: FormGroup;
   index: any;
   delete: boolean = false;
-  deleteIndex: any;
+  id: any;
  
   constructor(private fb: FormBuilder, private messageService: MessageService){
     this.productForm = this.fb.group({
@@ -67,7 +67,8 @@ export class TableComponent implements OnInit{
 
   onDelete(i: number) {
      this.delete = true
-     this.deleteIndex = i
+     this.id = i
+     console.log(i)
     // this.products = this.products.filter((product, index )=> index !== i);
     // // this.productsChange.emit(this.products);
     // this.updateParentData();
@@ -77,10 +78,10 @@ export class TableComponent implements OnInit{
 
   deleteConfirm(){
     
-    this.products = this.products.filter((product, index )=> index !== this.deleteIndex);
+    this.products = this.products.filter((product, index )=> product.id !== this.id);
     // this.productsChange.emit(this.products);
     this.delete = false
-
+    console.log(this.products)
     this.updateParentData();
     this.showBottomRight('delete')
   }
@@ -88,19 +89,22 @@ export class TableComponent implements OnInit{
   // opens modal and sets value to form
 
   
-  onEdit(product: Product, index: number) {
+  onEdit(product: Product, id: number) {
 
     this.visible = true
     this.update = true
-    this.index = index
-    this.productForm.setValue(product)
-    
+    this.id = id
+    this.productForm.get('name')?.setValue(product.name)
+    this.productForm.get('category')?.setValue(product.category)
+    this.productForm.get('price')?.setValue(product.price)
+
   }
 
 //  adds product to array
   onSubmit() {
     if (this.productForm.valid) {
-      this.products.push(this.productForm.value)
+      this.products.push({ ...this.productForm.value, id: Date.now() });
+      // this.products.push(this.productForm.value)
       // this.productForm.reset();
       // this.visible = false
       this.products = this.products
@@ -118,7 +122,12 @@ export class TableComponent implements OnInit{
 // updates the table with inserted value
   onUpdate(){
     if (this.productForm.valid){
-      this.products[this.index] = this.productForm.value;
+      
+      console.log(this.products.findIndex(ele => ele.id == this.id))
+
+      let index = this.products.findIndex(ele => ele.id == this.id)
+      this.products[index] = {id: this.id, ...this.productForm.value};
+      console.log(this.products)
       this.updateParentData()
       this.showBottomRight('Update')
     }
